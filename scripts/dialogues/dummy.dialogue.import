@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cbhllu1vy7fku"
+path="res://.godot/imported/dummy.dialogue-3502781a78f60528f7a2fc6c9a71573e.tres"
+
+[deps]
+
+source_file="res://scripts/dialogues/dummy.dialogue"
+dest_files=["res://.godot/imported/dummy.dialogue-3502781a78f60528f7a2fc6c9a71573e.tres"]
+
+[params]
+
+defaults=true

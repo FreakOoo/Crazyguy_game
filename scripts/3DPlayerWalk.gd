@@ -35,10 +35,8 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_forward"):
 		direction.z -= 1
 
-	#if direction != Vector3.ZERO:
-		#direction = direction.normalized()
-		## Setting the basis property will affect the rotation of the node.
-		#$Pivot.basis = Basis.looking_at(direction)
+	direction = Vector3(direction.x, 0, direction.z)
+	direction = direction.rotated(Vector3.UP, $CameraPivot.rotation.y)
 
 	# Ground Velocity
 	target_velocity.x = direction.x * speed
