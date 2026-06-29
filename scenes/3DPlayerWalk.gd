@@ -7,6 +7,21 @@ extends CharacterBody3D
 
 var target_velocity = Vector3.ZERO
 
+var rotating = false
+
+func rotate_camera(angle: float):
+	rotating = true
+
+	var tween = create_tween()
+	tween.tween_property(
+		$CameraPivot,
+		"rotation_degrees:y",
+		$CameraPivot.rotation_degrees.y + angle,
+		0.1
+	)
+
+	await tween.finished
+	rotating = false
 
 func _physics_process(delta):
 	var direction = Vector3.ZERO
@@ -36,3 +51,8 @@ func _physics_process(delta):
 	# Moving the Character
 	velocity = target_velocity
 	move_and_slide()
+	
+	if Input.is_action_pressed("rotate_camera_right") and !rotating:
+		rotate_camera(90)
+	if Input.is_action_pressed("rotate_camera_left") and !rotating:
+		rotate_camera(-90)
