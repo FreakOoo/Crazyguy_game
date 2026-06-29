@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dd78y21kjusv3"]
+
+[ext_resource type="Script" uid="uid://c40gtm67j7bth" path="res://scripts/board.gd" id="2_0wfyh"]
+[ext_resource type="AudioStream" uid="uid://baoduheltq2ts" path="res://music/Cyberia.mp3" id="2_sugp2"]
+[ext_resource type="VideoStream" uid="uid://bg3c1ynjyurr5" path="res://assets/wtf.ogv" id="3_sugp2"]
+
+[node name="Main" type="Node2D" unique_id=965495791]
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=1014517465]
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+stream = ExtResource("3_sugp2")
+autoplay = true
+expand = true
+loop = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=479384785]
+
+[node name="Board" type="Node2D" parent="." unique_id=1362006694]
+script = ExtResource("2_0wfyh")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=698380149]
+stream = ExtResource("2_sugp2")
+autoplay = true
+parameters/looping = true
