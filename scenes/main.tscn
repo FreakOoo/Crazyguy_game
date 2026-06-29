@@ -7,10 +7,10 @@
 [node name="Main" type="Node2D" unique_id=965495791]
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=1014517465]
-offset_left = -576.0
-offset_top = -324.0
-offset_right = 576.0
-offset_bottom = 324.0
+offset_left = -575.0
+offset_top = -323.0
+offset_right = 577.0
+offset_bottom = 325.0
 stream = ExtResource("3_sugp2")
 autoplay = true
 expand = true
