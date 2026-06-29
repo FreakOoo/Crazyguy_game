@@ -1,16 +1,30 @@
 [gd_scene format=3 uid="uid://ccx8gisgpf2tu"]
 
 [ext_resource type="Script" uid="uid://bc4osw6cbvmo0" path="res://scenes/3DPlayerWalk.gd" id="1_jqlwd"]
+[ext_resource type="ArrayMesh" uid="uid://bpkuymyraeyyd" path="res://assets/3dmodel/tree.fbx" id="2_g0ymw"]
+[ext_resource type="VideoStream" uid="uid://bg3c1ynjyurr5" path="res://assets/wtf.ogv" id="3_ro1ws"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4axvv"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_4axvv"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ro1ws"]
+resource_local_to_scene = true
+albedo_color = Color(0.97439295, 0, 0.41394642, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_316ov"]
 size = Vector3(100, 1, 100)
 
 [sub_resource type="BoxMesh" id="BoxMesh_316ov"]
 size = Vector3(100, 1, 100)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4axvv"]
+size = Vector2(10.8, 7.2)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_hq1py"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_316ov"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_hq1py")
 
 [node name="3Dworld" type="Node3D" unique_id=186806606]
 
@@ -21,10 +35,12 @@ script = ExtResource("1_jqlwd")
 shape = SubResource("CapsuleShape3D_4axvv")
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=1988670709]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0365548, 2.1081295)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0365548, 10.513348)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=1443585619]
-mesh = SubResource("CapsuleMesh_4axvv")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=2087332891]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.035119057, -0.03811264, 0.024967194)
+mesh = ExtResource("2_g0ymw")
+surface_material_override/0 = SubResource("StandardMaterial3D_ro1ws")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=607249165]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4844239, 15.020084)
@@ -38,3 +54,21 @@ shape = SubResource("BoxShape3D_316ov")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=852302615]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.300999, 0)
 mesh = SubResource("BoxMesh_316ov")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1503134527]
+size = Vector2i(1920, 1080)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="SubViewport" unique_id=1078110222]
+offset_right = 40.0
+offset_bottom = 40.0
+stretch = true
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="SubViewport/SubViewportContainer" unique_id=1052312303]
+layout_mode = 2
+stream = ExtResource("3_ro1ws")
+autoplay = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=833939732]
+transform = Transform3D(0.99996173, 1.6662225e-12, -0.008726529, -0.008726528, 3.8144868e-10, -0.99996185, 1.6662224e-12, 0.9999999, 3.814487e-10, 0, 5.1425476, 0)
+mesh = SubResource("PlaneMesh_4axvv")
+surface_material_override/0 = SubResource("StandardMaterial3D_316ov")
