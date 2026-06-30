@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://uh70dj3obvxh"]
+
+[ext_resource type="Script" uid="uid://cirstclona06v" path="res://assets/3dmodel/videocharacter.gd" id="1_u3e51"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_o7sc3"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ck01d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ktv10"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_ck01d")
+
+[node name="videocharacter" type="Node3D" unique_id=130885248]
+script = ExtResource("1_u3e51")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1246615743]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0028105974, 0.51230574, -0.004227042)
+mesh = SubResource("QuadMesh_o7sc3")
+surface_material_override/0 = SubResource("StandardMaterial3D_ktv10")

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bc4osw6cbvmo0" path="res://scripts/3DPlayerWalk.gd" id="1_jqlwd"]
 [ext_resource type="ArrayMesh" uid="uid://bpkuymyraeyyd" path="res://assets/3dmodel/tree.fbx" id="2_g0ymw"]
-[ext_resource type="Script" uid="uid://fhx3s7gqrjf" path="res://scripts/dialogues/dummy.gd" id="3_12lfk"]
 [ext_resource type="VideoStream" uid="uid://bg3c1ynjyurr5" path="res://assets/wtf.ogv" id="3_ro1ws"]
 [ext_resource type="Script" uid="uid://kpt5hy8y170y" path="res://scripts/dialogue_area.gd" id="5_n4klb"]
+[ext_resource type="PackedScene" uid="uid://uh70dj3obvxh" path="res://assets/3dmodel/videocharacter.tscn" id="6_o8l0y"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4axvv"]
 
@@ -18,18 +18,8 @@ size = Vector3(100, 1, 100)
 [sub_resource type="BoxMesh" id="BoxMesh_316ov"]
 size = Vector3(100, 1, 100)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_4axvv"]
-size = Vector2(10.8, 7.2)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_hq1py"]
-viewport_path = NodePath("MeshInstance3D/SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_316ov"]
-resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_hq1py")
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_4axvv"]
-size = Vector3(7.798584, 5.012268, 3.430542)
+size = Vector3(19.9281, 5.012268, 3.430542)
 
 [node name="3Dworld" type="Node3D" unique_id=186806606]
 
@@ -63,30 +53,27 @@ shape = SubResource("BoxShape3D_316ov")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=852302615]
 mesh = SubResource("BoxMesh_316ov")
 
-[node name="Dummy" type="MeshInstance3D" parent="." unique_id=833939732]
-transform = Transform3D(0.99996173, 1.6662225e-12, -0.008726529, -0.008726528, 3.8144868e-10, -0.99996185, 1.6662224e-12, 0.9999999, 3.814487e-10, 0, 4.123279, 0)
-mesh = SubResource("PlaneMesh_4axvv")
-surface_material_override/0 = SubResource("StandardMaterial3D_316ov")
-script = ExtResource("3_12lfk")
+[node name="videocharacter" parent="." unique_id=130885248 instance=ExtResource("6_o8l0y")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 1.7180092, 0.51873124, -0.9761156)
 
-[node name="SubViewport" type="SubViewport" parent="Dummy" unique_id=1503134527]
-size = Vector2i(1920, 1080)
+[node name="DialogueArea" type="Area3D" parent="videocharacter" unique_id=282408258]
+transform = Transform3D(0.99996173, 1.6662225e-12, -0.008726529, -0.008726528, 3.8144868e-10, -0.99996185, 1.6662224e-12, 0.9999999, 3.814487e-10, -12.718009, 3.604548, -4)
+script = ExtResource("5_n4klb")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Dummy/SubViewport" unique_id=1078110222]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="videocharacter/DialogueArea" unique_id=628731669]
+transform = Transform3D(1, -9.638557e-17, 6.342216e-22, 3.3393427e-16, 1, 2.3203661e-14, 1.8626451e-07, -2.3203661e-14, 1, 5.001645, 3.7827754, 1.2152703)
+shape = SubResource("BoxShape3D_4axvv")
+
+[node name="SubViewport2" type="SubViewport" parent="videocharacter" unique_id=1503134527]
+size = Vector2i(40, 40)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="videocharacter/SubViewport2" unique_id=1078110222]
 offset_right = 40.0
 offset_bottom = 40.0
 stretch = true
 
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Dummy/SubViewport/SubViewportContainer" unique_id=1052312303]
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="videocharacter/SubViewport2/SubViewportContainer" unique_id=1052312303]
 layout_mode = 2
 stream = ExtResource("3_ro1ws")
 autoplay = true
 loop = true
-
-[node name="DialogueArea" type="Area3D" parent="Dummy" unique_id=282408258]
-script = ExtResource("5_n4klb")
-dialogue = null
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Dummy/DialogueArea" unique_id=628731669]
-transform = Transform3D(1, 0, 6.341831e-22, -2.8622937e-17, 1, 0, 1.8626451e-07, 0, 1, -1.0631108, 3.7827744, 1.2152691)
-shape = SubResource("BoxShape3D_4axvv")

@@ -1,5 +1,5 @@
 extends Node3D
 
-@export var dialogue = [
-	"I'm so chinese"
-]
+#@export var dialogue = [
+	#"I'm so chinese"
+#]
