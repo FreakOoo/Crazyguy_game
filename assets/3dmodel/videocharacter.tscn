@@ -15,5 +15,6 @@ script = ExtResource("1_u3e51")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1246615743]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0028105974, 0.51230574, -0.004227042)
+visible = false
 mesh = SubResource("QuadMesh_o7sc3")
 surface_material_override/0 = SubResource("StandardMaterial3D_ktv10")
