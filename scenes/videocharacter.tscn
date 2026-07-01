@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cofifm5fjkog1"]
+
+[ext_resource type="Script" uid="uid://cirstclona06v" path="res://scripts/videocharacter.gd" id="1_4d27v"]
+
+[node name="videocharacter" type="Node3D" unique_id=130885248]
+script = ExtResource("1_4d27v")

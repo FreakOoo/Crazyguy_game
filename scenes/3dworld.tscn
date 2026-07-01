@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://bc4osw6cbvmo0" path="res://scripts/3DPlayerWalk.gd" id="1_jqlwd"]
 [ext_resource type="ArrayMesh" uid="uid://bpkuymyraeyyd" path="res://assets/3dmodel/tree.fbx" id="2_g0ymw"]
+[ext_resource type="Script" uid="uid://cirstclona06v" path="res://scripts/videocharacter.gd" id="3_n4klb"]
 [ext_resource type="VideoStream" uid="uid://bg3c1ynjyurr5" path="res://assets/wtf.ogv" id="3_ro1ws"]
 [ext_resource type="Script" uid="uid://kpt5hy8y170y" path="res://scripts/dialogue_area.gd" id="5_n4klb"]
-[ext_resource type="PackedScene" uid="uid://uh70dj3obvxh" path="res://assets/3dmodel/videocharacter.tscn" id="6_o8l0y"]
+[ext_resource type="Shader" uid="uid://bm8t8wlpnvpge" path="res://shaders/pixel.gdshader" id="6_o8l0y"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4axvv"]
 
@@ -23,8 +24,26 @@ size = Vector3(19.9281, 5.012268, 3.430542)
 
 [sub_resource type="QuadMesh" id="QuadMesh_l422c"]
 resource_local_to_scene = true
+size = Vector2(1.92, 1.08)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imh8f"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_n4klb"]
+viewport_path = NodePath("videocharacter/MeshInstance3D2/SubViewport2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_n4klb")
+
+[sub_resource type="Environment" id="Environment_4axvv"]
+background_mode = 2
+fog_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_316ov"]
+
+[sub_resource type="Compositor" id="Compositor_hq1py"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_316ov"]
+shader = ExtResource("6_o8l0y")
+shader_parameter/amount = 40
 
 [node name="3Dworld" type="Node3D" unique_id=186806606]
 
@@ -47,9 +66,6 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 mesh = ExtResource("2_g0ymw")
 surface_material_override/0 = SubResource("StandardMaterial3D_ro1ws")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=607249165]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4844239, 15.020084)
-
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1018316055]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1729461743]
@@ -58,8 +74,9 @@ shape = SubResource("BoxShape3D_316ov")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=852302615]
 mesh = SubResource("BoxMesh_316ov")
 
-[node name="videocharacter" parent="." unique_id=130885248 instance=ExtResource("6_o8l0y")]
+[node name="videocharacter" type="Node3D" parent="." unique_id=130885248]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 1.7180092, 0.51873124, -0.9761156)
+script = ExtResource("3_n4klb")
 
 [node name="DialogueArea" type="Area3D" parent="videocharacter" unique_id=282408258]
 transform = Transform3D(0.99996173, 1.6662225e-12, -0.008726529, -0.008726528, 3.8144868e-10, -0.99996185, 1.6662224e-12, 0.9999999, 3.814487e-10, -12.718009, 3.604548, -4)
@@ -70,15 +87,52 @@ transform = Transform3D(1, -9.638557e-17, 6.342216e-22, 3.3393427e-16, 1, 2.3203
 shape = SubResource("BoxShape3D_4axvv")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="videocharacter" unique_id=2091279139]
-transform = Transform3D(0.9999999, 1.2417635e-09, -2.891206e-19, 6.2088173e-10, 1, 3.7007435e-17, 8.6736174e-19, -1.4802974e-16, 1.0000001, -2.2649765e-06, 0.5428953, 4.172325e-07)
+transform = Transform3D(0.9999999, 1.2417635e-09, -2.891206e-19, 6.2088173e-10, 1, 3.7007435e-17, 8.6736174e-19, -1.4802974e-16, 1.0000002, -2.2649765e-06, 0.53482866, 4.172325e-07)
 mesh = SubResource("QuadMesh_l422c")
-surface_material_override/0 = SubResource("StandardMaterial3D_imh8f")
+surface_material_override/0 = SubResource("StandardMaterial3D_ig7tw")
 
 [node name="SubViewport2" type="SubViewport" parent="videocharacter/MeshInstance3D2" unique_id=1503134527]
+size = Vector2i(1920, 1080)
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="videocharacter/MeshInstance3D2/SubViewport2" unique_id=1052312303]
 offset_right = 1920.0
 offset_bottom = 1080.0
 stream = ExtResource("3_ro1ws")
 autoplay = true
+expand = true
 loop = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=248240992]
+environment = SubResource("Environment_4axvv")
+camera_attributes = SubResource("CameraAttributesPractical_316ov")
+compositor = SubResource("Compositor_hq1py")
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="WorldEnvironment" unique_id=388213231]
+transform = Transform3D(1, 0, 0, 0, -0.88713, 0.46151963, 0, -0.46151963, -0.88713, 12.816383, 8.015205, -5.268009)
+light_color = Color(1.2032688e-05, 0.83123446, 1.1551381e-06, 1)
+shadow_enabled = true
+distance_fade_enabled = true
+omni_range = 14.989481
+
+[node name="OmniLight3D" type="OmniLight3D" parent="WorldEnvironment" unique_id=806223651]
+transform = Transform3D(1, 0, 0, 0, -0.23756053, -0.9713728, 0, 0.9713728, -0.23756053, -2.76643, 5.35437, -4.048729)
+light_color = Color(0, 0, 1, 1)
+shadow_enabled = true
+distance_fade_enabled = true
+omni_range = 14.989481
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=607249165]
+transform = Transform3D(1, 0, 0, 0, 0.90152544, 0.4327262, 0, -0.4327262, 0.90152544, 0, 198.94577, 279.6405)
+shadow_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=173010819]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=75509825]
+material = SubResource("ShaderMaterial_316ov")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.12941177)
