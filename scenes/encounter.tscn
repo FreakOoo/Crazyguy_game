@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bxepd4pjjoyna"]
+
+[ext_resource type="Script" uid="uid://d147mo0txu287" path="res://scenes/encounter.gd" id="1_lp88p"]
+
+[node name="Encounter" type="Control" unique_id=1535823634]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_lp88p")

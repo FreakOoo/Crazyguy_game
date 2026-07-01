@@ -6,7 +6,7 @@ extends CharacterBody3D
 @export var fall_acceleration = 75
 
 var target_velocity = Vector3.ZERO
-
+var can_move = true
 var rotating = false
 
 func rotate_camera(angle: float):
@@ -23,8 +23,13 @@ func rotate_camera(angle: float):
 	await tween.finished
 	rotating = false
 
-func _physics_process(delta):
+func handle_control(delta):
 	var direction = Vector3.ZERO
+
+	if !can_move:
+		velocity = Vector3.ZERO
+		move_and_slide()
+		return
 
 	if Input.is_action_pressed("move_right"):
 		direction.x += 1
@@ -41,7 +46,7 @@ func _physics_process(delta):
 	# Ground Velocity
 	target_velocity.x = direction.x * speed
 	target_velocity.z = direction.z * speed
-
+ 
 	# Vertical Velocity
 	if not is_on_floor(): # If in the air, fall towards the floor. Literally gravity
 		target_velocity.y = target_velocity.y - (fall_acceleration * delta)
@@ -51,6 +56,9 @@ func _physics_process(delta):
 	move_and_slide()
 	
 	if Input.is_action_pressed("rotate_camera_right") and !rotating:
-		rotate_camera(90)
-	if Input.is_action_pressed("rotate_camera_left") and !rotating:
 		rotate_camera(-90)
+	if Input.is_action_pressed("rotate_camera_left") and !rotating:
+		rotate_camera(90)
+
+func _physics_process(delta):
+	handle_control(delta)

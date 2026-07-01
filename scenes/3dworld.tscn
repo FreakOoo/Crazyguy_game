@@ -4,6 +4,7 @@
 [ext_resource type="ArrayMesh" uid="uid://bpkuymyraeyyd" path="res://assets/3dmodel/tree.fbx" id="2_g0ymw"]
 [ext_resource type="Script" uid="uid://cirstclona06v" path="res://scripts/videocharacter.gd" id="3_n4klb"]
 [ext_resource type="VideoStream" uid="uid://bg3c1ynjyurr5" path="res://assets/wtf.ogv" id="3_ro1ws"]
+[ext_resource type="Script" uid="uid://byggtrwgu43mi" path="res://scenes/detect.gd" id="5_imh8f"]
 [ext_resource type="Script" uid="uid://kpt5hy8y170y" path="res://scripts/dialogue_area.gd" id="5_n4klb"]
 [ext_resource type="Shader" uid="uid://bm8t8wlpnvpge" path="res://shaders/pixel.gdshader" id="6_o8l0y"]
 
@@ -21,6 +22,9 @@ size = Vector3(100, 1, 100)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4axvv"]
 size = Vector3(19.9281, 5.012268, 3.430542)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pcyqi"]
+size = Vector3(1.0280304, 0.90216064, 0.9592819)
 
 [sub_resource type="QuadMesh" id="QuadMesh_l422c"]
 resource_local_to_scene = true
@@ -47,22 +51,23 @@ shader_parameter/amount = 40
 
 [node name="3Dworld" type="Node3D" unique_id=186806606]
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1225888900]
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1225888900]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.94176245, 4.4732094)
 script = ExtResource("1_jqlwd")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1279227175]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1279227175]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7218679, 0)
 shape = SubResource("CapsuleShape3D_4axvv")
 
-[node name="CameraPivot" type="Node3D" parent="CharacterBody3D" unique_id=1621071264]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0365548, -0.00941658)
+[node name="CameraPivot" type="Node3D" parent="Player" unique_id=1621071264]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.009)
 
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/CameraPivot" unique_id=1988670709]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.173193)
+[node name="Camera3D" type="Camera3D" parent="Player/CameraPivot" unique_id=1988670709]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4721973, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=2087332891]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=2087332891]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+visible = false
 mesh = ExtResource("2_g0ymw")
 surface_material_override/0 = SubResource("StandardMaterial3D_ro1ws")
 
@@ -85,6 +90,14 @@ script = ExtResource("5_n4klb")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="videocharacter/DialogueArea" unique_id=628731669]
 transform = Transform3D(1, -9.638557e-17, 6.342216e-22, 3.3393427e-16, 1, 2.3203661e-14, 1.8626451e-07, -2.3203661e-14, 1, 5.001645, 3.7827754, 1.2152703)
 shape = SubResource("BoxShape3D_4axvv")
+
+[node name="Detect" type="Area3D" parent="videocharacter" unique_id=1006941684]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.2769974, 0.04498017, 0.32537186)
+script = ExtResource("5_imh8f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="videocharacter/Detect" unique_id=1245789868]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1488651, 0.33265835, 0.08811569)
+shape = SubResource("BoxShape3D_pcyqi")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="videocharacter" unique_id=2091279139]
 transform = Transform3D(0.9999999, 1.2417635e-09, -2.891206e-19, 6.2088173e-10, 1, 3.7007435e-17, 8.6736174e-19, -1.4802974e-16, 1.0000002, -2.2649765e-06, 0.53482866, 4.172325e-07)
@@ -125,10 +138,10 @@ omni_range = 14.989481
 transform = Transform3D(1, 0, 0, 0, 0.90152544, 0.4327262, 0, -0.4327262, 0.90152544, 0, 198.94577, 279.6405)
 shadow_enabled = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=173010819]
+[node name="Shader" type="CanvasLayer" parent="." unique_id=173010819]
 visible = false
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=75509825]
+[node name="ColorRect" type="ColorRect" parent="Shader" unique_id=75509825]
 material = SubResource("ShaderMaterial_316ov")
 anchors_preset = 15
 anchor_right = 1.0
@@ -136,3 +149,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0.12941177)
+
+[node name="Encounter_canvas" type="CanvasLayer" parent="." unique_id=1116392124]
+
+[connection signal="body_entered" from="videocharacter/Detect" to="videocharacter/Detect" method="_on_body_entered"]
+[connection signal="body_exited" from="videocharacter/Detect" to="videocharacter/Detect" method="_on_body_exited"]

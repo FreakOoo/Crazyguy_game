@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://3syrmxwj36ti"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8dlc1"]
+size = Vector3(1.1859375, 0.7, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_upmtm"]
+albedo_color = Color(0.2646562, 0.26619282, 0.26926607, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pcyqi"]
+size = Vector3(1.2127991, 0.71066284, 1.0024414)
+
+[node name="Rock" type="StaticBody3D" unique_id=1551560008]
+
+[node name="mesh" type="MeshInstance3D" parent="." unique_id=936850679]
+transform = Transform3D(0.94449663, -0.125567, 0.30357727, 0.14034867, 0.9897262, -0.027280947, -0.29703286, 0.068373434, 0.95241606, -0.007031262, 0, 0)
+mesh = SubResource("BoxMesh_8dlc1")
+surface_material_override/0 = SubResource("StandardMaterial3D_upmtm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=333544967]
+transform = Transform3D(0.9446497, -0.12759623, 0.302252, 0.14257333, 0.9893904, -0.02792164, -0.29548252, 0.06946924, 0.95281905, -0.0017852783, -0.0048675537, -0.0012207031)
+shape = SubResource("BoxShape3D_pcyqi")
