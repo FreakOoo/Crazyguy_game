@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dwdp6txruej7x"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_n4klb"]
+viewport_path = NodePath("videocharacter/MeshInstance3D2/SubViewport2")
+
+[resource]
+resource_local_to_scene = true
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0)
+albedo_texture = SubResource("ViewportTexture_n4klb")

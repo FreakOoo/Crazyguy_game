@@ -158,6 +158,7 @@ void fragment() {
 	float blue = sample_screen(cuv - chroma_offset).b;
 
 	vec3 color = vec3(red, green, blue);
+	vec3 res_color = vec3(red, green, blue);
 
 	// --- Luma smear / horizontal ghosting ---
 	float smear = luma_smear_px * px.x;

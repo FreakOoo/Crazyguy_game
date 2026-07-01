@@ -6,12 +6,26 @@
 [ext_resource type="VideoStream" uid="uid://bg3c1ynjyurr5" path="res://assets/wtf.ogv" id="3_ro1ws"]
 [ext_resource type="Shader" uid="uid://bnsosdelike0c" path="res://shaders/greenscreen.gdshader" id="5_imh8f"]
 [ext_resource type="Script" uid="uid://kpt5hy8y170y" path="res://scripts/dialogue_area.gd" id="5_n4klb"]
+[ext_resource type="Material" uid="uid://dwdp6txruej7x" path="res://materials/video.tres" id="5_vtyyc"]
 [ext_resource type="Shader" uid="uid://bm8t8wlpnvpge" path="res://shaders/pixel.gdshader" id="6_o8l0y"]
+[ext_resource type="Shader" uid="uid://chmwwffs2bfg6" path="res://outline.gdshader" id="8_vtyyc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4axvv"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vtyyc"]
+render_priority = 0
+shader = ExtResource("8_vtyyc")
+shader_parameter/scale = 4.0
+shader_parameter/outline_spread = 1.0
+shader_parameter/_Color = Color(1, 1, 1, 1)
+shader_parameter/_DepthNormalThreshold = 0.1
+shader_parameter/_DepthNormalThresholdScale = 4.0
+shader_parameter/_DepthThreshold = 2.0
+shader_parameter/_NormalThreshold = 1.0
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ro1ws"]
 resource_local_to_scene = true
+next_pass = SubResource("ShaderMaterial_vtyyc")
 albedo_color = Color(0.97439295, 0, 0.41394642, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_316ov"]
@@ -28,20 +42,16 @@ resource_local_to_scene = true
 lightmap_size_hint = Vector2i(11, 7)
 size = Vector2(1.92, 1.08)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_n4klb"]
-viewport_path = NodePath("videocharacter/MeshInstance3D2/SubViewport2")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
-resource_local_to_scene = true
-blend_mode = 1
-albedo_color = Color(1, 1, 1, 0)
-albedo_texture = SubResource("ViewportTexture_n4klb")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oyk2i"]
+render_priority = 0
 shader = ExtResource("5_imh8f")
-shader_parameter/transparent_color = Color(0, 0, 0, 1)
-shader_parameter/pickup_range = 0.3
-shader_parameter/fade_amount = 1.0
+shader_parameter/scale = 1.0
+shader_parameter/outline_spread = 1.0
+shader_parameter/_Color = Color(0, 1, 0, 1)
+shader_parameter/_DepthNormalThreshold = 0.1
+shader_parameter/_DepthNormalThresholdScale = 3.0
+shader_parameter/_DepthThreshold = 1.5
+shader_parameter/_NormalThreshold = 2.0
 
 [sub_resource type="Environment" id="Environment_4axvv"]
 background_mode = 2
@@ -119,7 +129,7 @@ shape = SubResource("BoxShape3D_4axvv")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="videocharacter" unique_id=2091279139]
 transform = Transform3D(0.9999999, 1.2417635e-09, -2.891206e-19, 6.2088173e-10, 1, 3.7007435e-17, 8.6736174e-19, -1.4802974e-16, 1.0000002, 0.00013256073, 0.53482866, 7.1525574e-06)
 mesh = SubResource("QuadMesh_l422c")
-surface_material_override/0 = SubResource("StandardMaterial3D_ig7tw")
+surface_material_override/0 = ExtResource("5_vtyyc")
 
 [node name="SubViewport2" type="SubViewport" parent="videocharacter/MeshInstance3D2" unique_id=1503134527]
 transparent_bg = true
