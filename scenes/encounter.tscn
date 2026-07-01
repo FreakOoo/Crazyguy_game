@@ -1,10 +1,19 @@
 [gd_scene format=3 uid="uid://bxepd4pjjoyna"]
 
-[ext_resource type="Script" uid="uid://d147mo0txu287" path="res://scenes/encounter.gd" id="1_lp88p"]
+[ext_resource type="Script" uid="uid://d147mo0txu287" path="res://scripts/encounter.gd" id="1_lp88p"]
+[ext_resource type="Script" uid="uid://c40gtm67j7bth" path="res://scripts/board.gd" id="2_eu4s7"]
 
 [node name="Encounter" type="Control" unique_id=1535823634]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 85.0
+offset_bottom = 51.0
 script = ExtResource("1_lp88p")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=71664007]
+layout_mode = 0
+offset_right = 174.0
+offset_bottom = 115.0
+
+[node name="Board" type="Node2D" parent="." unique_id=1386140609]
+script = ExtResource("2_eu4s7")

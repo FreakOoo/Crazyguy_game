@@ -4,9 +4,10 @@
 [ext_resource type="ArrayMesh" uid="uid://bpkuymyraeyyd" path="res://assets/3dmodel/tree.fbx" id="2_g0ymw"]
 [ext_resource type="Script" uid="uid://cirstclona06v" path="res://scripts/videocharacter.gd" id="3_n4klb"]
 [ext_resource type="VideoStream" uid="uid://bg3c1ynjyurr5" path="res://assets/wtf.ogv" id="3_ro1ws"]
-[ext_resource type="Script" uid="uid://byggtrwgu43mi" path="res://scenes/detect.gd" id="5_imh8f"]
+[ext_resource type="Script" uid="uid://byggtrwgu43mi" path="res://scripts/detect.gd" id="5_imh8f"]
 [ext_resource type="Script" uid="uid://kpt5hy8y170y" path="res://scripts/dialogue_area.gd" id="5_n4klb"]
 [ext_resource type="Shader" uid="uid://bm8t8wlpnvpge" path="res://shaders/pixel.gdshader" id="6_o8l0y"]
+[ext_resource type="PackedScene" uid="uid://bxepd4pjjoyna" path="res://scenes/encounter.tscn" id="8_vtyyc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4axvv"]
 
@@ -151,6 +152,8 @@ grow_vertical = 2
 color = Color(1, 1, 1, 0.12941177)
 
 [node name="Encounter_canvas" type="CanvasLayer" parent="." unique_id=1116392124]
+
+[node name="Encounter" parent="Encounter_canvas" unique_id=1535823634 instance=ExtResource("8_vtyyc")]
 
 [connection signal="body_entered" from="videocharacter/Detect" to="videocharacter/Detect" method="_on_body_entered"]
 [connection signal="body_exited" from="videocharacter/Detect" to="videocharacter/Detect" method="_on_body_exited"]
