@@ -16,9 +16,7 @@ signal move_completed()
 
 
 func _ready():
-	print("Board: _ready() вызван")
 	initialize_board()
-	print("Board: инициализация завершена, создано фишек: ", count_pieces())
 
 func count_pieces() -> int:
 	var count = 0
@@ -218,7 +216,6 @@ func _input(event):
 		var mouse_pos = get_global_mouse_position()
 		var grid_x = floor(mouse_pos.x / CELL_SIZE)
 		var grid_y = floor(mouse_pos.y / CELL_SIZE)
-		print("gridx: ", grid_x, " gridy: ", grid_y, "\n")
 		if grid_x < 0 or grid_x >= board_width or grid_y < 0 or grid_y >= board_height:
 			return
 		var piece = board[grid_y][grid_x]
