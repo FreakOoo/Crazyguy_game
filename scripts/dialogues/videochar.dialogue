@@ -1,0 +1,13 @@
+~ start
+VideoChar: Look at you, such a little playablecharactercel, I'm going to break your legs you FREAK. Unless you play candy crush right NOW, then maybe I'll let you live.
+- I understand
+	VideoChar: Smart choice. Now PLAY. You have 10 seconds...R`
+	=> END
+- I do not understand
+	VideoChar: Wrong answer, freak.
+	VideoChar: The guy kills yo ass.
+	=> END
+- *Kill yourself*
+	VideoChar: ...excuse me?
+	VideoChar: I SAID I'M GOING TO BREAK YOUR LEGS. DO YOU WANT THAT?
+	=> END
