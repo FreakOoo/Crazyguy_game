@@ -1,15 +1,15 @@
 [remap]
 
-importer="ArrayMesh"
+importer="scene"
 importer_version=1
-type="ArrayMesh"
+type="PackedScene"
 uid="uid://bpkuymyraeyyd"
-path="res://.godot/imported/tree.fbx-bd99b1e0a4e596789324954438049a89.res"
+path="res://.godot/imported/tree.fbx-bd99b1e0a4e596789324954438049a89.scn"
 
 [deps]
 
 source_file="res://assets/3dmodel/tree.fbx"
-dest_files=["res://.godot/imported/tree.fbx-bd99b1e0a4e596789324954438049a89.res"]
+dest_files=["res://.godot/imported/tree.fbx-bd99b1e0a4e596789324954438049a89.scn"]
 
 [params]
 

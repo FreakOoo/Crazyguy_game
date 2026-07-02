@@ -1,26 +1,28 @@
-extends Node3D
-#
-#@onready var interaction_area = $InteractionArea
-#
-#var player_in_range = false
-#var current_player = null
-#
-#func _ready():
-	## Подключаем сигналы
-	#interaction_area.body_entered.connect(_on_body_entered)
-	#interaction_area.body_exited.connect(_on_body_exited)
-#
-#func _on_body_entered(body: Node):
-	## Проверяем, что это действительно игрок (можно по группе или классу)
-	#if body.is_in_group("player"):
-		#player_in_range = true
-		#current_player = body
-#
-#func _on_body_exited(body: Node):
-	#if body == current_player:
-		#player_in_range = false
-		#current_player = null
-		#
-#func _input(event: InputEvent):
-	#if event.is_action_pressed("interact") and player_in_range:
-		#start_dialogue()
+extends Area3D
+
+var dialogue = preload("res://scripts/dialogues/videochar.dialogue")
+var player: Node = null
+var is_showing := false
+
+func _ready():
+	body_entered.connect(_on_body_entered)
+	body_exited.connect(_on_body_exited)
+
+func _on_body_entered(body: Node3D):
+	if body.name == "Player" and not is_showing:
+		player = body
+		is_showing = true
+		player.can_move = false
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		var balloon = DialogueManager.show_dialogue_balloon(dialogue, "start")
+		balloon.tree_exited.connect(_on_balloon_closed)
+
+func _on_body_exited(body: Node3D):
+	if body.name == "Player":
+		player = null
+
+func _on_balloon_closed():
+	is_showing = false
+	if is_instance_valid(player):
+		player.can_move = true
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

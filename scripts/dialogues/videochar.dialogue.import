@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bc0vlknvbek1s"
+path="res://.godot/imported/videochar.dialogue-c2ef59c1be3310c9f1cacea6b70309ed.tres"
+
+[deps]
+
+source_file="res://scripts/dialogues/videochar.dialogue"
+dest_files=["res://.godot/imported/videochar.dialogue-c2ef59c1be3310c9f1cacea6b70309ed.tres"]
+
+[params]
+
+defaults=true
