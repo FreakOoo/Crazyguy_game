@@ -24,6 +24,8 @@ DialogueManager="*uid://c3rodes2l3gxb"
 
 [display]
 
+window/size/viewport_width=1080
+window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 

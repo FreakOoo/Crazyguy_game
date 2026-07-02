@@ -1,5 +1,28 @@
 [gd_scene format=3 uid="uid://dclqanrh6gth0"]
 
 [ext_resource type="PackedScene" uid="uid://dd78y21kjusv3" path="res://scenes/main.tscn" id="1_ig7tw"]
+[ext_resource type="Shader" uid="uid://chmwwffs2bfg6" path="res://outline.gdshader" id="2_0xm2m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h2yge"]
+render_priority = 0
+shader = ExtResource("2_0xm2m")
+shader_parameter/scale = 1.0
+shader_parameter/outline_spread = 1.0
+shader_parameter/_Color = Color(0, 1, 0, 1)
+shader_parameter/_DepthNormalThreshold = 0.1
+shader_parameter/_DepthNormalThresholdScale = 3.0
+shader_parameter/_DepthThreshold = 1.5
+shader_parameter/_NormalThreshold = 2.0
 
 [node name="Main" unique_id=965495791 instance=ExtResource("1_ig7tw")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="4" unique_id=1136065289]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" index="0" unique_id=1843710579]
+material = SubResource("ShaderMaterial_h2yge")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.12941177)

@@ -1,8 +1,9 @@
 ~ start
-chinese man: [[Hi|Hello|Howdy]], this is some dialogue.
+chinese man: [[Hi|Hello|~Nihao]], this is some dialogue.
 chinese man: Here are some choices.
 - First one
 	chinese man: You picked the first one.
+	chinese man: Wise choice western man
 - Second one
 	chinese man: You picked the second one.
 - Start again => start
