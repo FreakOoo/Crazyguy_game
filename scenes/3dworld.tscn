@@ -3,49 +3,16 @@
 [ext_resource type="Script" uid="uid://bc4osw6cbvmo0" path="res://scripts/3DPlayerWalk.gd" id="1_jqlwd"]
 [ext_resource type="Script" uid="uid://cirstclona06v" path="res://scripts/videocharacter.gd" id="3_n4klb"]
 [ext_resource type="VideoStream" uid="uid://bg3c1ynjyurr5" path="res://assets/wtf.ogv" id="3_ro1ws"]
+[ext_resource type="Shader" uid="uid://bnsosdelike0c" path="res://shaders/greenscreen.gdshader" id="4_imh8f"]
 [ext_resource type="Script" uid="uid://byggtrwgu43mi" path="res://scripts/detect.gd" id="5_imh8f"]
 [ext_resource type="Shader" uid="uid://bm8t8wlpnvpge" path="res://shaders/pixel.gdshader" id="6_o8l0y"]
 [ext_resource type="PackedScene" uid="uid://bxepd4pjjoyna" path="res://scenes/encounter.tscn" id="8_vtyyc"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4axvv"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_316ov"]
-size = Vector3(100, 1, 100)
-
-[sub_resource type="BoxMesh" id="BoxMesh_316ov"]
-size = Vector3(100, 1, 100)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_pcyqi"]
-size = Vector3(1.0280304, 0.90216064, 0.9592819)
-
-[sub_resource type="QuadMesh" id="QuadMesh_l422c"]
-resource_local_to_scene = true
-lightmap_size_hint = Vector2i(11, 7)
-size = Vector2(1.92, 1.08)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oyk2i"]
-render_priority = 0
-shader = ExtResource("5_imh8f")
-shader_parameter/scale = 1.0
-shader_parameter/outline_spread = 1.0
-shader_parameter/_Color = Color(0, 1, 0, 1)
-shader_parameter/_DepthNormalThreshold = 0.1
-shader_parameter/_DepthNormalThresholdScale = 3.0
-shader_parameter/_DepthThreshold = 1.5
-shader_parameter/_NormalThreshold = 2.0
-
-[sub_resource type="Environment" id="Environment_4axvv"]
-background_mode = 2
-
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_316ov"]
-
-[sub_resource type="Compositor" id="Compositor_hq1py"]
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_316ov"]
 shader = ExtResource("6_o8l0y")
-shader_parameter/brightness = 1.0000000475
+shader_parameter/brightness = 1.02
 shader_parameter/contrast = 1.08
-shader_parameter/saturation = 1.0
+shader_parameter/saturation = 1.1
 shader_parameter/gamma = 1.05
 shader_parameter/curvature = 0.14
 shader_parameter/corner_soften = 0.06
@@ -66,7 +33,63 @@ shader_parameter/roll_strength = 0.15
 shader_parameter/glow_strength = 0.25
 shader_parameter/glow_threshold = 0.65
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4axvv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_316ov"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_316ov"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pcyqi"]
+size = Vector3(1.0280304, 0.90216064, 0.9592819)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vtyyc"]
+render_priority = 0
+shader = ExtResource("4_imh8f")
+shader_parameter/scale = 1.0
+shader_parameter/outline_spread = 1.0
+shader_parameter/_Color = Color(0, 0, 0, 1)
+shader_parameter/_DepthNormalThreshold = 0.1
+shader_parameter/_DepthNormalThresholdScale = 3.0
+shader_parameter/_DepthThreshold = 1.5
+shader_parameter/_NormalThreshold = 2.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_l422c"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_vtyyc")
+size = Vector2(1.92, 1.08)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_n4klb"]
+viewport_path = NodePath("videocharacter/MeshInstance3D2/SubViewport2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
+resource_local_to_scene = true
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_n4klb")
+
+[sub_resource type="Environment" id="Environment_4axvv"]
+background_mode = 2
+fog_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_316ov"]
+
+[sub_resource type="Compositor" id="Compositor_hq1py"]
+
 [node name="3Dworld" type="Node3D" unique_id=186806606]
+
+[node name="Shader" type="CanvasLayer" parent="." unique_id=173010819]
+
+[node name="ColorRect" type="ColorRect" parent="Shader" unique_id=75509825]
+material = SubResource("ShaderMaterial_316ov")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.12941177)
 
 [node name="Player" type="CharacterBody3D" parent="." unique_id=1225888900]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.94176245, 4.4732094)
@@ -80,7 +103,7 @@ shape = SubResource("CapsuleShape3D_4axvv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.009)
 
 [node name="Camera3D" type="Camera3D" parent="Player/CameraPivot" unique_id=1988670709]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4721973, 14.6366625)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.472, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=2087332891]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
@@ -106,16 +129,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1488651, 0.33265835, 0.0881
 shape = SubResource("BoxShape3D_pcyqi")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="videocharacter" unique_id=2091279139]
-transform = Transform3D(0.9999999, 1.2417635e-09, -2.891206e-19, 6.2088173e-10, 1, 3.7007435e-17, 8.6736174e-19, -1.4802974e-16, 1.0000002, 0.00013256073, 0.53482866, 7.1525574e-06)
+transform = Transform3D(0.9999999, 1.2417635e-09, -2.891206e-19, 6.2088173e-10, 1, 3.7007435e-17, 8.6736174e-19, -1.4802974e-16, 1.0000002, -2.2649765e-06, 0.53482866, 4.172325e-07)
 mesh = SubResource("QuadMesh_l422c")
-surface_material_override/0 = ExtResource("5_vtyyc")
+surface_material_override/0 = SubResource("StandardMaterial3D_ig7tw")
 
 [node name="SubViewport2" type="SubViewport" parent="videocharacter/MeshInstance3D2" unique_id=1503134527]
-transparent_bg = true
 size = Vector2i(1920, 1080)
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="videocharacter/MeshInstance3D2/SubViewport2" unique_id=1052312303]
-material = SubResource("ShaderMaterial_oyk2i")
 offset_right = 1920.0
 offset_bottom = 1080.0
 stream = ExtResource("3_ro1ws")
@@ -145,18 +166,6 @@ omni_range = 14.989481
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=607249165]
 transform = Transform3D(1, 0, 0, 0, 0.90152544, 0.4327262, 0, -0.4327262, 0.90152544, 0, 198.94577, 279.6405)
 shadow_enabled = true
-
-[node name="Shader" type="CanvasLayer" parent="." unique_id=173010819]
-visible = false
-
-[node name="ColorRect" type="ColorRect" parent="Shader" unique_id=75509825]
-material = SubResource("ShaderMaterial_316ov")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 1, 1, 0.12941177)
 
 [node name="Encounter_canvas" type="CanvasLayer" parent="." unique_id=1116392124]
 
