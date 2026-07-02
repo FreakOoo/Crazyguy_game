@@ -7,6 +7,7 @@ extends CharacterBody3D
 
 var target_velocity = Vector3.ZERO
 var can_move = true
+var is_talking = false
 var rotating = false
 
 func rotate_camera(angle: float):

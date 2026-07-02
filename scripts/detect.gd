@@ -9,15 +9,14 @@ var dialogue = preload("res://scripts/dialogues/videochar.dialogue")
 
 
 func interact():
-	is_showing = true
 	var balloon = DialogueManager.show_dialogue_balloon(dialogue, "start")
 	balloon.tree_exited.connect(_on_balloon_closed)
 
 func _on_balloon_closed():
-	is_showing = false
 	if is_instance_valid(player):
 		player.can_move = true
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		player.is_talking = false
 
 func _on_body_entered(body):
 	print("ENTER:", body.name)
@@ -32,8 +31,9 @@ func _on_body_exited(body):
 		print("Player exited")
 
 func _process(_delta):
-	if player_near and Input.is_action_just_pressed("interact"):
+	if player_near and Input.is_action_just_pressed("interact") and (player.is_talking != true):
 		#gamemode.open()
+		player.is_talking = true
 		player.can_move = false
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		interact()
