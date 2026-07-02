@@ -1,28 +1,19 @@
 [gd_scene format=3 uid="uid://ccx8gisgpf2tu"]
 
 [ext_resource type="Script" uid="uid://bc4osw6cbvmo0" path="res://scripts/3DPlayerWalk.gd" id="1_jqlwd"]
-[ext_resource type="ArrayMesh" uid="uid://bpkuymyraeyyd" path="res://assets/3dmodel/tree.fbx" id="2_g0ymw"]
 [ext_resource type="Script" uid="uid://cirstclona06v" path="res://scripts/videocharacter.gd" id="3_n4klb"]
 [ext_resource type="VideoStream" uid="uid://bg3c1ynjyurr5" path="res://assets/wtf.ogv" id="3_ro1ws"]
 [ext_resource type="Script" uid="uid://byggtrwgu43mi" path="res://scripts/detect.gd" id="5_imh8f"]
-[ext_resource type="Script" uid="uid://kpt5hy8y170y" path="res://scripts/dialogue_area.gd" id="5_n4klb"]
 [ext_resource type="Shader" uid="uid://bm8t8wlpnvpge" path="res://shaders/pixel.gdshader" id="6_o8l0y"]
 [ext_resource type="PackedScene" uid="uid://bxepd4pjjoyna" path="res://scenes/encounter.tscn" id="8_vtyyc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4axvv"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ro1ws"]
-resource_local_to_scene = true
-albedo_color = Color(0.97439295, 0, 0.41394642, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_316ov"]
 size = Vector3(100, 1, 100)
 
 [sub_resource type="BoxMesh" id="BoxMesh_316ov"]
 size = Vector3(100, 1, 100)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_4axvv"]
-size = Vector3(19.9281, 5.012268, 3.430542)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pcyqi"]
 size = Vector3(1.0280304, 0.90216064, 0.9592819)
@@ -64,13 +55,10 @@ shape = SubResource("CapsuleShape3D_4axvv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.009)
 
 [node name="Camera3D" type="Camera3D" parent="Player/CameraPivot" unique_id=1988670709]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4721973, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4721973, 14.6366625)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=2087332891]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
-visible = false
-mesh = ExtResource("2_g0ymw")
-surface_material_override/0 = SubResource("StandardMaterial3D_ro1ws")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1018316055]
 
@@ -83,14 +71,6 @@ mesh = SubResource("BoxMesh_316ov")
 [node name="videocharacter" type="Node3D" parent="." unique_id=130885248]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 1.7180092, 0.51873124, -0.9761156)
 script = ExtResource("3_n4klb")
-
-[node name="DialogueArea" type="Area3D" parent="videocharacter" unique_id=282408258]
-transform = Transform3D(0.99996173, 1.6662225e-12, -0.008726529, -0.008726528, 3.8144868e-10, -0.99996185, 1.6662224e-12, 0.9999999, 3.814487e-10, -12.718009, 3.604548, -4)
-script = ExtResource("5_n4klb")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="videocharacter/DialogueArea" unique_id=628731669]
-transform = Transform3D(1, -9.638557e-17, 6.342216e-22, 3.3393427e-16, 1, 2.3203661e-14, 1.8626451e-07, -2.3203661e-14, 1, 5.001645, 3.7827754, 1.2152703)
-shape = SubResource("BoxShape3D_4axvv")
 
 [node name="Detect" type="Area3D" parent="videocharacter" unique_id=1006941684]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.2769974, 0.04498017, 0.32537186)
